@@ -1,0 +1,70 @@
+<div>
+  <div>
+    <h1>
+      List of all agencies
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new agency
+    </h2>
+
+    <form action="/insert_agency" method="post">
+      <button>
+        Create agency
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_agencies.each do |an_agency| %>
+      <tr>
+        <td>
+          <%= an_agency.id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(an_agency.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(an_agency.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/agencies/<%= an_agency.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

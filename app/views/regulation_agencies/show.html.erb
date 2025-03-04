@@ -1,0 +1,86 @@
+<div>
+  <div>
+    <h1>
+      Regulation agency #<%= @the_regulation_agency.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/regulation_agencies">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_regulation_agency/<%= @the_regulation_agency.id %>">
+          Delete regulation agency
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Agency
+      </dt>
+      <dd>
+        <%= @the_regulation_agency.agency_id %>
+      </dd>
+
+      <dt>
+        Regulation
+      </dt>
+      <dd>
+        <%= @the_regulation_agency.regulation_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_regulation_agency.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_regulation_agency.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit regulation agency
+    </h2>
+
+    <form action="/modify_regulation_agency/<%= @the_regulation_agency.id %>"  method="post" >
+      <div>
+        <label for="agency_id_box">
+          Agency
+        </label>
+
+        <input type="text" id="agency_id_box" name="query_agency_id" value="<%= @the_regulation_agency.agency_id %>">
+      </div>
+
+      <div>
+        <label for="regulation_id_box">
+          Regulation
+        </label>
+
+        <input type="text" id="regulation_id_box" name="query_regulation_id" value="<%= @the_regulation_agency.regulation_id %>">
+      </div>
+
+      <button>
+        Update regulation agency
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

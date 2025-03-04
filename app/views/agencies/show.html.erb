@@ -1,0 +1,56 @@
+<div>
+  <div>
+    <h1>
+      Agency #<%= @the_agency.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/agencies">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_agency/<%= @the_agency.id %>">
+          Delete agency
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_agency.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_agency.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit agency
+    </h2>
+
+    <form action="/modify_agency/<%= @the_agency.id %>"  method="post" >
+      <button>
+        Update agency
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
