@@ -8,7 +8,25 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-  </head>
+</head>
+<body>
+    <nav>
+      <a href="/">Search</a>
+
+      <% if current_user != nil %>
+      <a href="/users/bookmarks">Bookmarks</a>
+      <a href="/users/sign_out">Sign out</a>
+      <a href="/users/edit">Edit profile</a>
+      <%else%>
+    <a href="/users/sign_up">Sign up</a>
+      <a href="/users/sign_in">Sign in</a>
+      <%end%>
+
+    </nav>
+
+    <hr>
+
+  </body>
 
   <body>
     <%= yield %>

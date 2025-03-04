@@ -1,7 +1,7 @@
 <div>
   <div>
     <h1>
-      List of all regulations
+      Search the Federal Register
     </h1>
   </div>
 </div>
@@ -10,89 +10,16 @@
 
 <div>
   <div>
-    <h2>
-      Add a new regulation
-    </h2>
-
     <form action="/insert_regulation" method="post">
       <div>
         <label for="register_url_box">
-          Register url
+          <a href="https://www.federalregister.gov/">Federal Register</a> URL
         </label>
 
         <input type="text" id="register_url_box" name="query_register_url">
       </div>
 
-      <div>
-        <label for="document_number_box">
-          Document number
-        </label>
-
-        <input type="text" id="document_number_box" name="query_document_number">
-      </div>
-
-      <div>
-        <label for="pdf_url_box">
-          Pdf url
-        </label>
-
-        <input type="text" id="pdf_url_box" name="query_pdf_url">
-      </div>
-
-      <div>
-        <label for="title_box">
-          Title
-        </label>
-
-        <input type="text" id="title_box" name="query_title">
-      </div>
-
-      <div>
-        <label for="action_box">
-          Action
-        </label>
-
-        <input type="text" id="action_box" name="query_action">
-      </div>
-
-      <div>
-        <label for="original_url_box">
-          Original url
-        </label>
-
-        <input type="text" id="original_url_box" name="query_original_url">
-      </div>
-
-      <div>
-        <label for="raw_url_box">
-          Raw url
-        </label>
-
-        <input type="text" id="raw_url_box" name="query_raw_url">
-      </div>
-
-      <div>
-        <label for="comment_count_box">
-          Comment count
-        </label>
-
-        <input type="text" id="comment_count_box" name="query_comment_count">
-      </div>
-
-      <div>
-        <label for="citation_box">
-          Citation
-        </label>
-
-        <input type="text" id="citation_box" name="query_citation">
-      </div>
-
-      <div>
-        <label for="significant_box">
-          Significant
-        </label>
-
-        <input type="text" id="significant_box" name="query_significant">
+        <input type="hidden" id="document_number_box" name="query_document_number">
       </div>
 
       <button>
@@ -101,26 +28,19 @@
     </form>
   </div>
 </div>
-
 <hr>
+    <h2>
+      Search History
+    </h2>
+
+
 <div>
   <div>
     <table border="1">
       <tr>
-        <th>
-          ID
-        </th>
-
-        <th>
-          Register url
-        </th>
-
+        
         <th>
           Document number
-        </th>
-
-        <th>
-          Pdf url
         </th>
 
         <th>
@@ -130,55 +50,23 @@
         <th>
           Action
         </th>
-
-        <th>
-          Original url
-        </th>
-
-        <th>
-          Raw url
-        </th>
-
         <th>
           Comment count
         </th>
-
-        <th>
-          Citation
-        </th>
-
         <th>
           Significant
         </th>
+        <th> Created </th>
+        <th> Updated </th>
+        <th> Details </th>
 
-        <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-
-        <th>
-        </th>
       </tr>
 
       <% @list_of_regulations.each do |a_regulation| %>
       <tr>
-        <td>
-          <%= a_regulation.id %>
-        </td>
-
-        <td>
-          <%= a_regulation.register_url %>
-        </td>
 
         <td>
           <%= a_regulation.document_number %>
-        </td>
-
-        <td>
-          <%= a_regulation.pdf_url %>
         </td>
 
         <td>
@@ -190,20 +78,9 @@
         </td>
 
         <td>
-          <%= a_regulation.original_url %>
-        </td>
-
-        <td>
-          <%= a_regulation.raw_url %>
-        </td>
-
-        <td>
           <%= a_regulation.comment_count %>
         </td>
 
-        <td>
-          <%= a_regulation.citation %>
-        </td>
 
         <td>
           <%= a_regulation.significant %>
