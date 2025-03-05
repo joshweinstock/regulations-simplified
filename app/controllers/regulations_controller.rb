@@ -18,18 +18,13 @@ class RegulationsController < ApplicationController
   end
 
   def create
-rails g devise:views -b form_for
-  require "http"
-  require "json"
     the_regulation = Regulation.new
     the_regulation.register_url = params.fetch("query_register_url")
-
-    url = "https://www.federalregister.gov/documents/2024/12/10/2024-27939/medicare-and-medicaid-programs-contract-year-2026-policy-and-technical-changes-to-the-medicare"
+    url= params.fetch("query_register_url")
+ 
     parsed_uri = URI.parse(url)
     path_segments = parsed_uri.path.split("/").reject { |segment| segment.empty? }
     key_segment = path_segments.at(4)
-
-
 
          api_url="https://www.federalregister.gov/api/v1/documents/#{key_segment}.json?fields[]=abstract&fields[]=action&fields[]=agencies&fields[]=agency_names&fields[]=body_html_url&fields[]=citation&fields[]=document_number&fields[]=effective_on&fields[]=html_url&fields[]=pdf_url&fields[]=significant"
 
@@ -37,6 +32,9 @@ rails g devise:views -b form_for
      @raw_string = @raw_response.to_s
      @parsed_data = JSON.parse(@raw_string)
 
+
+     # look at parsed data, decide which to parts of hash to store
+     
     the_regulation.document_number = params.fetch("query_document_number")
     the_regulation.pdf_url = params.fetch("query_pdf_url")
     the_regulation.title = params.fetch("query_title")
