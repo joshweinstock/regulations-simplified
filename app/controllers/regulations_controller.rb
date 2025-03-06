@@ -31,21 +31,18 @@ class RegulationsController < ApplicationController
      @raw_response = HTTP.get(api_url)
      @raw_string = @raw_response.to_s
      @parsed_data = JSON.parse(@raw_string)
-
-
-     # look at parsed data, decide which to parts of hash to store
      
-    the_regulation.document_number = params.fetch("query_document_number")
-    the_regulation.pdf_url = params.fetch("query_pdf_url")
-    the_regulation.title = params.fetch("query_title")
-    the_regulation.action = params.fetch("query_action")
-    the_regulation.original_url = params.fetch("query_original_url")
-    the_regulation.raw_url = params.fetch("query_raw_url")
-    the_regulation.citation = params.fetch("query_citation")
-    the_regulation.significant = params.fetch("query_significant")
+    @parsed_data["document_number"] = params.fetch("query_document_number", nil)
+    @parsed_data["pdf_url"] = params.fetch("query_pdf_url", nil)
+    @parsed_data["title"] = params.fetch("query_title", nil)
+    @parsed_data["action"] = params.fetch("query_action", nil)
+    @parsed_data["original_url"] = params.fetch("original_url", nil)
+    @parsed_data["raw_url"] = params.fetch("query_raw_url", nil)
+    @parsed_data["citation"] = params.fetch("query_citation", nil)
+    @parsed_data["signficant"] = params.fetch("query_significant", nil)
 
-    if the_regulation.valid?
-      the_regulation.save
+    if @parsed_data.valid?
+      @parsed_data.save
       redirect_to("/regulations", { :notice => "Regulation created successfully." })
     else
       redirect_to("/regulations", { :alert => the_regulation.errors.full_messages.to_sentence })
