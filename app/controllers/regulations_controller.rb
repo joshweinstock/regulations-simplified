@@ -18,31 +18,30 @@ class RegulationsController < ApplicationController
   end
 
   def create
-    the_regulation = Regulation.new
-    the_regulation.register_url = params.fetch("query_register_url")
     url= params.fetch("query_register_url")
  
     parsed_uri = URI.parse(url)
     path_segments = parsed_uri.path.split("/").reject { |segment| segment.empty? }
     key_segment = path_segments.at(4)
 
-         api_url="https://www.federalregister.gov/api/v1/documents/#{key_segment}.json?fields[]=abstract&fields[]=action&fields[]=agencies&fields[]=agency_names&fields[]=body_html_url&fields[]=citation&fields[]=document_number&fields[]=effective_on&fields[]=html_url&fields[]=pdf_url&fields[]=significant"
+         api_url="https://www.federalregister.gov/api/v1/documents/#{key_segment}.json?fields[]=abstract&fields[]=action&fields[]=agencies&fields[]=agency_names&fields[]=body_html_url&fields[]=citation&fields[]=document_number&fields[]=effective_on&fields[]=pdf_url&fields[]=significant&fields[]=title"
 
      @raw_response = HTTP.get(api_url)
      @raw_string = @raw_response.to_s
      @parsed_data = JSON.parse(@raw_string)
      
-    @parsed_data["document_number"] = params.fetch("query_document_number", nil)
-    @parsed_data["pdf_url"] = params.fetch("query_pdf_url", nil)
-    @parsed_data["title"] = params.fetch("query_title", nil)
-    @parsed_data["action"] = params.fetch("query_action", nil)
-    @parsed_data["original_url"] = params.fetch("original_url", nil)
-    @parsed_data["raw_url"] = params.fetch("query_raw_url", nil)
-    @parsed_data["citation"] = params.fetch("query_citation", nil)
-    @parsed_data["signficant"] = params.fetch("query_significant", nil)
+     regulation = Regulation.new
+     regulation.document_number = @parsed_data["document_number"]
+     regulation.pdf_url = @parsed_data["pdf_url"]
+     regulation.title = @parsed_data["title"]
+     regulation.action = @parsed_data["action"]
+     regulation.citation = @parsed_data["citation"]
+     regulation.significant = @parsed_data["significant"]
+     regulation.register_url = @parsed_data["body_html_url"]
 
-    if @parsed_data.valid?
-      @parsed_data.save
+
+    if regulation.valid?
+      regulation.save
       redirect_to("/regulations", { :notice => "Regulation created successfully." })
     else
       redirect_to("/regulations", { :alert => the_regulation.errors.full_messages.to_sentence })

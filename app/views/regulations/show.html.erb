@@ -1,22 +1,8 @@
 <div>
   <div>
     <h1>
-      Regulation #<%= @the_regulation.id %> details
+      <%= @the_regulation.title %>
     </h1>
-
-    <div>
-      <div>
-        <a href="/regulations">
-          Go back
-        </a>
-      </div>
-
-      <div>
-        <a href="/delete_regulation/<%= @the_regulation.id %>">
-          Delete regulation
-        </a>
-      </div>
-    </div>
 
     <dl>
       <dt>
@@ -31,13 +17,6 @@
       </dt>
       <dd>
         <%= @the_regulation.document_number %>
-      </dd>
-
-      <dt>
-        Pdf url
-      </dt>
-      <dd>
-        <%= @the_regulation.pdf_url %>
       </dd>
 
       <dt>
@@ -98,9 +77,32 @@
     </dl>
   </div>
 </div>
-
 <hr>
 
+<div>
+<div>
+
+  <a href="<%= @the_regulation.pdf_url %>"> PDF link </a>
+
+</div>
+</div>
+
+<hr>
+    <div>
+      <div>
+        <a href="/regulations">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_regulation/<%= @the_regulation.id %>">
+          Delete regulation
+        </a>
+      </div>
+    </div>
+
+    <hr>
 
 <div>
   <div>
