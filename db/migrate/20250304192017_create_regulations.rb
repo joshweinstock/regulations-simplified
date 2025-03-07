@@ -10,7 +10,7 @@ class CreateRegulations < ActiveRecord::Migration[7.1]
       t.string :raw_url
       t.integer :comment_count
       t.string :citation
-      t.string :significant
+      t.boolean :significant
 
       t.timestamps
     end

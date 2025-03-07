@@ -5,12 +5,6 @@
     </h1>
 
     <dl>
-      <dt>
-        Register url
-      </dt>
-      <dd>
-        <%= @the_regulation.register_url %>
-      </dd>
 
       <dt>
         Document number
@@ -34,20 +28,6 @@
       </dd>
 
       <dt>
-        Original url
-      </dt>
-      <dd>
-        <%= @the_regulation.original_url %>
-      </dd>
-
-      <dt>
-        Raw url
-      </dt>
-      <dd>
-        <%= @the_regulation.raw_url %>
-      </dd>
-
-      <dt>
         Citation
       </dt>
       <dd>
@@ -58,7 +38,11 @@
         Significant
       </dt>
       <dd>
-        <%= @the_regulation.significant %>
+        <% if @the_regulation.significant == true %>
+          Yes
+        <% else %>
+           No
+        <% end %>
       </dd>
 
       <dt>
@@ -82,9 +66,20 @@
 <div>
 <div>
 
+  <a href="<%= @the_regulation.register_url %>"> Federal Register link </a>
+
+</div>
+<div>
+
   <a href="<%= @the_regulation.pdf_url %>"> PDF link </a>
 
 </div>
+<div>
+
+  <a href="<%= @the_regulation.raw_url %>"> Raw link </a>
+
+</div>
+
 </div>
 
 <hr>
@@ -103,91 +98,3 @@
     </div>
 
     <hr>
-
-<div>
-  <div>
-    <h2>
-      Edit regulation
-    </h2>
-
-    <form action="/modify_regulation/<%= @the_regulation.id %>"  method="post" >
-      <div>
-        <label for="register_url_box">
-          Register url
-        </label>
-
-        <input type="text" id="register_url_box" name="query_register_url" value="<%= @the_regulation.register_url %>">
-      </div>
-
-      <div>
-        <label for="document_number_box">
-          Document number
-        </label>
-
-        <input type="text" id="document_number_box" name="query_document_number" value="<%= @the_regulation.document_number %>">
-      </div>
-
-      <div>
-        <label for="pdf_url_box">
-          Pdf url
-        </label>
-
-        <input type="text" id="pdf_url_box" name="query_pdf_url" value="<%= @the_regulation.pdf_url %>">
-      </div>
-
-      <div>
-        <label for="title_box">
-          Title
-        </label>
-
-        <input type="text" id="title_box" name="query_title" value="<%= @the_regulation.title %>">
-      </div>
-
-      <div>
-        <label for="action_box">
-          Action
-        </label>
-
-        <input type="text" id="action_box" name="query_action" value="<%= @the_regulation.action %>">
-      </div>
-
-      <div>
-        <label for="original_url_box">
-          Original url
-        </label>
-
-        <input type="text" id="original_url_box" name="query_original_url" value="<%= @the_regulation.original_url %>">
-      </div>
-
-      <div>
-        <label for="raw_url_box">
-          Raw url
-        </label>
-
-        <input type="text" id="raw_url_box" name="query_raw_url" value="<%= @the_regulation.raw_url %>">
-      </div>
-
-      <div>
-        <label for="citation_box">
-          Citation
-        </label>
-
-        <input type="text" id="citation_box" name="query_citation" value="<%= @the_regulation.citation %>">
-      </div>
-
-      <div>
-        <label for="significant_box">
-          Significant
-        </label>
-
-        <input type="text" id="significant_box" name="query_significant" value="<%= @the_regulation.significant %>">
-      </div>
-
-      <button>
-        Update regulation
-      </button>
-    </form>
-  </div>
-</div>
-
-<hr>
