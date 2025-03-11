@@ -53,15 +53,17 @@ class RegulationsController < ApplicationController
        },
        {
          "role" => "user",
-         "content" => "Here is the full text of the regulation: #{parsed_data['body_html_url']}"
+         "content" => "Here is the full text of the regulation: #{@parsed_data['body_html_url']}"
         }
      ]
-          summary = client.chat(
+          response = client.chat(
        parameters: {
          model: "gpt-3.5-turbo",
          messages: message_list
        }
      )
+     regulation.summary = response.dig('choices', 0, 'message', 'content')
+
       
     if regulation.valid?
       regulation.save
