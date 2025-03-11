@@ -1,5 +1,6 @@
 class RegulationsController < ApplicationController
   before_action :authenticate_user!
+
   def index
     matching_regulations = Regulation.where(user_id:current_user.id)
 
@@ -43,7 +44,25 @@ class RegulationsController < ApplicationController
      regulation.register_url = @parsed_data["html_url"]
      regulation.user_id = user_id
 
-
+     client = OpenAI::Client.new(access_token: ENV.fetch("OPENAI_API_KEY"))
+     message_list = [
+       {
+         "role" => "system",
+         "content" => "You are a policy researcher interested in studying various federal regulations. Provide a brief 300 word summary of the following regulation that summarizes what the regulation plans to do and how it will impact the department or agency currently operates.  Do not take any stance on the regulation itself. mention possible downsides or issues with the regulation. Assume that I am not aware of the programs that the regulation refers to and avoid abbreviations. 
+"
+       },
+       {
+         "role" => "user",
+         "content" => "Here is the full text of the regulation: #{parsed_data['body_html_url']}"
+        }
+     ]
+          summary = client.chat(
+       parameters: {
+         model: "gpt-3.5-turbo",
+         messages: message_list
+       }
+     )
+      
     if regulation.valid?
       regulation.save
       redirect_to("/regulations", { :notice => "Regulation created successfully." })

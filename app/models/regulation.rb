@@ -12,6 +12,7 @@
 #  raw_url         :string
 #  register_url    :string
 #  significant     :boolean
+#  summary         :string
 #  title           :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null

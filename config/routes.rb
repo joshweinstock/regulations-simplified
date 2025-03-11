@@ -3,44 +3,6 @@ Rails.application.routes.draw do
   root to: "regulations#index"
 
 
-  # Routes for the Regulation agency resource:
-
-  # CREATE
-  post("/insert_regulation_agency", { :controller => "regulation_agencies", :action => "create" })
-          
-  # READ
-  get("/regulation_agencies", { :controller => "regulation_agencies", :action => "index" })
-  
-  get("/regulation_agencies/:path_id", { :controller => "regulation_agencies", :action => "show" })
-  
-  # UPDATE
-  
-  post("/modify_regulation_agency/:path_id", { :controller => "regulation_agencies", :action => "update" })
-  
-  # DELETE
-  get("/delete_regulation_agency/:path_id", { :controller => "regulation_agencies", :action => "destroy" })
-
-  #------------------------------
-
-  # Routes for the Agency resource:
-
-  # CREATE
-  post("/insert_agency", { :controller => "agencies", :action => "create" })
-          
-  # READ
-  get("/agencies", { :controller => "agencies", :action => "index" })
-  
-  get("/agencies/:path_id", { :controller => "agencies", :action => "show" })
-  
-  # UPDATE
-  
-  post("/modify_agency/:path_id", { :controller => "agencies", :action => "update" })
-  
-  # DELETE
-  get("/delete_agency/:path_id", { :controller => "agencies", :action => "destroy" })
-
-  #------------------------------
-
   # Routes for the Bookmark resource:
 
   # CREATE
