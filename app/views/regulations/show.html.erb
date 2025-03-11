@@ -1,57 +1,125 @@
-<div>
-  <div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
     <h1>
       <%= @the_regulation.title %>
-    </h1>
+    </h1>      </div>
+  </div>
+<div>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="alert alert-primary">
+      Document number
+      </div>
+    </div>
 
-    <dl>
+    <div class="col-md-9">
+      <div class="alert alert-secondary">
+    <%= @the_regulation.document_number %>
+      </div>
+    </div>
+  </div>
 
-      <dt>
-        Document number
-      </dt>
-      <dd>
-        <%= @the_regulation.document_number %>
-      </dd>
+    <div class="row">
+    <div class="col-md-3">
+      <div class="alert alert-primary">
+      Title
+      </div>
+    </div>
 
-      <dt>
-        Title
-      </dt>
-      <dd>
-        <%= @the_regulation.title %>
-      </dd>
+    <div class="col-md-9">
+      <div class="alert alert-secondary">
+     <%= @the_regulation.title %>
+      </div>
+    </div>
+  </div>
 
-      <dt>
-        Action
-      </dt>
-      <dd>
-        <%= @the_regulation.action %>
-      </dd>
+   <div class="row">
+    <div class="col-md-3">
+      <div class="alert alert-primary">
+      Action
+      </div>
+    </div>
 
-      <dt>
-        Citation
-      </dt>
-      <dd>
-        <%= @the_regulation.citation %>
-      </dd>
+    <div class="col-md-9">
+      <div class="alert alert-secondary">
+     <%= @the_regulation.action %>
+      </div>
+    </div>
+  </div>
 
-      <dt>
-        Significant
-      </dt>
-      <dd>
-        <% if @the_regulation.significant == true %>
+   <div class="row">
+    <div class="col-md-3">
+      <div class="alert alert-primary">
+      Citation
+      </div>
+    </div>
+
+    <div class="col-md-9">
+      <div class="alert alert-secondary">
+     <%= @the_regulation.citation %>
+      </div>
+    </div>
+  </div>
+
+   <div class="row">
+    <div class="col-md-3">
+      <div class="alert alert-primary">
+      Significant
+      </div>
+    </div>
+
+    <div class="col-md-9">
+      <div class="alert alert-secondary">
+      <% if @the_regulation.significant == true %>
           Yes
         <% else %>
            No
         <% end %>
-      </dd>
+      </div>
+    </div>
+  </div>
 
-     
-      <dt>
-        Summary
-      </dt>
-      <dd>
-        <%= @the_regulation.summary %>
-      </dd>
+<div class="row">
+        <div class="col-md-12">
+      <div class="alert alert-primary">
+      Summary:
+      </div>
+    </div>
+    </div>
+
+    <div class="row">
+    <div class="col-md-12">
+      <div class="alert alert-secondary">
+           <%= @the_regulation.summary %>
+
+      </div>
+    </div>
+    </div>
+
+<div class="row">
+    <div class="col-md-4">
+      <div class="alert alert-success">
+        <a href="<%= @the_regulation.register_url %>"> Federal Register Regulation </a>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="alert alert-success">
+  <a href="<%= @the_regulation.pdf_url %>"> PDF Link </a>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="alert alert-success">
+  <a href="<%= @the_regulation.raw_url %>"> Original Link </a>
+      </div>
+    </div>
+  </div>
+
+
+    </div>
+
 
       <dt>
         Created at
@@ -66,29 +134,9 @@
       <dd>
         <%= time_ago_in_words(@the_regulation.updated_at) %> ago
       </dd>
-    </dl>
-  </div>
-</div>
+
+
 <hr>
-
-<div>
-<div>
-
-  <a href="<%= @the_regulation.register_url %>"> Federal Register link </a>
-
-</div>
-<div>
-
-  <a href="<%= @the_regulation.pdf_url %>"> PDF link </a>
-
-</div>
-<div>
-
-  <a href="<%= @the_regulation.raw_url %>"> Raw link </a>
-
-</div>
-
-</div>
 
 <hr>
     <div>

@@ -62,9 +62,9 @@ class RegulationsController < ApplicationController
          messages: message_list
        }
      )
-     regulation.summary = response.dig('choices', 0, 'message', 'content')
 
-      
+     regulation.summary = response.fetch("choices").at(0).fetch("message").fetch("content")
+
     if regulation.valid?
       regulation.save
       redirect_to("/regulations", { :notice => "Regulation created successfully." })
