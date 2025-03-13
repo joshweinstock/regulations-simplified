@@ -22,7 +22,6 @@ class RegulationsController < ApplicationController
   def create
     url = params.fetch("query_register_url")
     
-    # Attempt to parse the URL; redirect with an alert if it fails.
     begin
       parsed_uri = URI.parse(url)
     rescue URI::InvalidURIError => error
@@ -32,14 +31,12 @@ class RegulationsController < ApplicationController
     path_segments = parsed_uri.path.split("/").reject { |segment| segment.empty? }
     key_segment = path_segments.at(4)
   
-    # Check that the URL includes the expected segments.
     if key_segment.nil?
       redirect_to("/regulations", { :alert => "The URL is missing necessary segments." }) and return
     end
   
     api_url = "https://www.federalregister.gov/api/v1/documents/#{key_segment}.json?fields[]=abstract&fields[]=action&fields[]=agencies&fields[]=agency_names&fields[]=body_html_url&fields[]=citation&fields[]=document_number&fields[]=effective_on&fields[]=pdf_url&fields[]=significant&fields[]=title&fields[]=html_url"
   
-    # Try fetching and parsing API data; rescue any issues that arise.
     begin
       raw_response = HTTP.get(api_url)
       raw_string = raw_response.to_s
@@ -68,7 +65,7 @@ class RegulationsController < ApplicationController
       full_text = ""
     end
   
-    full_text = full_text.truncate(10000)
+    full_text = full_text.truncate(50000)
   
     client = OpenAI::Client.new(access_token: ENV.fetch("OPENAI_API_KEY"))
     message_list = [
