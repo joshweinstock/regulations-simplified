@@ -1,6 +1,6 @@
 <div>
   <div>
-    <h1>
+    <h1 class="text-center" >
       Search the Federal Register
     </h1>
   </div>
@@ -8,73 +8,56 @@
 
 <hr>
 
-<div>
-  <div>
-    <form action="/insert_regulation" method="post">
-      <div>
+  <div class="container">
+    <form action="/insert_regulation" method="post" style="display: flex; align-items: center;">
+      <div style="margin-right: 10px;">
         <label for="register_url_box">
-          <a href="https://www.federalregister.gov/">Federal Register</a> URL
+          Add a regulation from the <a href="https://www.federalregister.gov/">Federal Register</a> by submitting a URL:
         </label>
-
         <input type="text" id="register_url_box" name="query_register_url">
       </div>
 
-        <input type="hidden" id="document_number_box" name="query_document_number">
+      <input type="hidden" id="document_number_box" name="query_document_number">
 
-      </div>
-      <a class="btn btn-primary">Create Regulation</a>
-
-
+      <a class="btn btn-primary" style="margin-left: 10px;">Create Regulation</a>
     </form>
   </div>
-</div>
+
 <hr>
-    <h2>
+    <h3 class="text-center">
 Saved Regulations
-    </h2>
+    </h3>
 
 
 <div>
   <div>
-    <table border="1">
+    <table class="table table-hover" border="1">
+    <thead>
       <tr>
-        
-        <th>
-          Document number
-        </th>
-
-        <th>
-          Title
-        </th>
-
-        <th>
-          Action
-        </th>
-        <th>
-          Significant
-        </th>
-        <th> Created </th>
-        <th> Updated </th>
-        <th> Details </th>
-
+        <th class="col-1">Document number</th>
+        <th class="col-6">Title</th>
+        <th class="col-2">Action</th>
+        <th class="col-1">Significant</th>
+        <th class="col-1"> Created </th>
+        <th class="col-1">  Details </th>
       </tr>
-
+      </thead>
+      <tbody>
       <% @list_of_regulations.each do |a_regulation| %>
       <tr>
-
-        <td>
+        <td >
           <%= a_regulation.document_number %>
         </td>
 
-        <td>
+        <td >
           <%= a_regulation.title %>
         </td>
 
-        <td>
+        <td >
           <%= a_regulation.action %>
         </td>
         
-        <td>
+        <td >
       <% if a_regulation.significant == true %>
           Yes
         <% else %>
@@ -83,20 +66,19 @@ Saved Regulations
 
         </td>
 
-        <td>
+        <td >
           <%= time_ago_in_words(a_regulation.created_at) %> ago
         </td>
-        <td>
-          <%= time_ago_in_words(a_regulation.updated_at) %> ago
-        </td>
 
-        <td>
+        <td >
           <a href="/regulations/<%= a_regulation.id %>">
             Show details
           </a>
         </td>
       </tr>
       <% end %>
+  
+      <tbody>
     </table>
   </div>
 </div>
