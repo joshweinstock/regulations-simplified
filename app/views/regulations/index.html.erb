@@ -34,9 +34,9 @@ Saved Regulations
     <table class="table table-hover" border="1">
     <thead>
       <tr>
-        <th class="col-1">Document number</th>
-        <th class="col-6">Title</th>
-        <th class="col-2">Action</th>
+        <th class="col-3">Department/Agency</th>
+        <th class="col-5">Title</th>
+        <th class="col-1">Action</th>
         <th class="col-1">Significant</th>
         <th class="col-1"> Created </th>
         <th class="col-1">  Details </th>
@@ -46,7 +46,7 @@ Saved Regulations
       <% @list_of_regulations.each do |a_regulation| %>
       <tr>
         <td >
-          <%= a_regulation.document_number %>
+          <%= a_regulation.agency_names.join(", ") %>
         </td>
 
         <td >

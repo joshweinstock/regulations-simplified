@@ -42,6 +42,8 @@ class RegulationsController < ApplicationController
      regulation.significant = @parsed_data["significant"]
      regulation.original_url = @parsed_data["body_html_url"]
      regulation.register_url = @parsed_data["html_url"]
+     regulation.agency_names = @parsed_data["agency_names"]
+  
      regulation.user_id = user_id
 
      client = OpenAI::Client.new(access_token: ENV.fetch("OPENAI_API_KEY"))
@@ -72,6 +74,18 @@ class RegulationsController < ApplicationController
       redirect_to("/regulations", { :alert => regulation.errors.full_messages.to_sentence })
     end
 
+  end
+
+  def destroy
+    the_id = params.fetch("path_id")  
+    regulation = Regulation.find_by(id: the_id, user_id: current_user.id)
+
+    if regulation
+      regulation.destroy
+      redirect_to("/regulations", { :notice => "Regulation deleted successfully." })
+    else
+      redirect_to("/regulations", { :alert => "Regulation not found or you do not have permission to delete it." })
+    end
   end
 end
 
