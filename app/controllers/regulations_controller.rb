@@ -57,7 +57,6 @@ class RegulationsController < ApplicationController
     regulation.agency_names = parsed_data.fetch("agency_names")
     regulation.user_id = current_user.id
   
-    # Try fetching the full text; if that fails, you might do something else.
     begin
       full_text_response = HTTP.get(parsed_data.fetch("body_html_url"))
       full_text = full_text_response.to_s
